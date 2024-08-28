@@ -6,9 +6,9 @@ const Form = () => {
         <div>
             <div class="side-container">
                 <ul>
-                    <li>Details</li>
-                    <li>Event</li>
-                    <li>Confirm</li>
+                    <li><a>Details</a></li>
+                    <li><a>Event</a></li>
+                    <li><a>Confirm</a></li>
                 </ul>
             </div>
             <h1>main form details</h1>
