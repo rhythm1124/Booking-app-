@@ -1,0 +1,88 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4a90e2;
+    padding: 10px 20px;
+    height: 60px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1100; /* Ensures the navbar is above other elements */
+    position: fixed; /* Fixed position to stay on top */
+    top: 0; /* Aligns to the top */
+    left: 80px; /* Position it next to the side container */
+    width: calc(100% - 80px); /* Full width minus side container width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.navbar-title {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-user {
+    color: #ffffff;
+    font-size: 18px;
+    margin-left: auto; /* Pushes the user section to the right */
+}
+
+.navbar-hamburger {
+    display: none; /* Hidden by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.side-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 60px; /* Position it below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: #739ab9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu li {
+    margin: 0;
+    padding: 10px;
+    color: #fbf0d8;
+    cursor: pointer;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px;
+        height: auto;
+        left: 0; /* Full width on small screens */
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .navbar-title {
+        display: none; /* Hide title on smaller screens */
+    }
+
+    .navbar-user {
+        display: none; /* Hide user section on smaller screens */
+    }
+
+    .navbar-hamburger {
+        display: block; /* Show hamburger icon on smaller screens */
+    }
+
+    .side-menu.show {
+        display: block; /* Show side menu when hamburger is clicked */
+    }
+}
