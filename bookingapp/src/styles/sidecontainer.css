@@ -4,10 +4,10 @@
     position: fixed;
     background-color: #739ab9;
     height: 100vh;
-    width: 80px;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    width: 80px; /* Fixed width for side container */
+    top: 0; /* Aligns to the top */
+    left: 0; /* Aligns to the left edge */
+    z-index: 1000; /* Ensures it's below the navbar */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -30,48 +30,8 @@
     color: inherit;
 }
 
-.hamburger {
-    display: none; /* Hidden by default */
-    font-size: 24px;
-    cursor: pointer;
-    color: #ffffff;
-    margin-left: 10px; /* Space between user and hamburger icon */
-}
-
 @media (max-width: 768px) {
     .side-container {
-        width: 100%;
-        height: auto;
-        position: fixed;
-        top: 60px; /* Position below the navbar */
-        left: 0;
-        transform: translateY(-100%);
-        box-shadow: none;
-        flex-direction: column;
-        background-color: #739ab9;
-    }
-
-    .side-container ul {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-        display: none; /* Hide menu items by default */
-    }
-
-    .side-container.show ul {
-        display: flex; /* Show menu items when the menu is open */
-    }
-
-    .side-container.show {
-        transform: translateY(0);
-    }
-
-    .hamburger {
-        display: block; /* Show hamburger icon on smaller screens */
-        position: absolute;
-        right: 10px; /* Align icon to the far right */
-        top: 50%;
-        transform: translateY(-50%); /* Center vertically */
+        display: none; /* Hide the side container on smaller screens */
     }
 }
