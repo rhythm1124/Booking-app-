@@ -9,14 +9,28 @@ const Form = () => {
             <NavBar /> {/* Add the NavBar component here */}
             <SideContainer /> {/* Add the SideContainer component here */}
             <div className="main-content">
-                <h1>Main Form Details</h1>
-                <ul className="color-theme">
-                    <li id="a">Cool Blue</li>
-                    <li id="b">Light Greyish</li>
-                    <li id="c">Macadamia</li>
-                    <li id="d">Redwood</li>
-                    <li id="e">Burnt Under</li>
-                </ul>
+                <h1>Book Your Show/Movie</h1>
+                <form className="booking-form">
+                    <label htmlFor="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required />
+
+                    <label htmlFor="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required />
+
+                    <label htmlFor="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required />
+
+                    <label htmlFor="date">Preferred Date:</label>
+                    <input type="date" id="date" name="date" required />
+
+                    <label htmlFor="time">Preferred Time:</label>
+                    <input type="time" id="time" name="time" required />
+
+                    <label htmlFor="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" name="tickets" min="1" required />
+
+                    <button type="submit">Book Now</button>
+                </form>
             </div>
         </div>
     );

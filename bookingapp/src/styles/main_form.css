@@ -1,17 +1,56 @@
 .main-content {
-    margin-left: 100px;
+    margin-left: 80px; /* Space for the side container */
+    margin-top: 60px;  /* Space for the navbar */
     padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-#a {color: #113047;}
-#b {color: #739ab9;}
-#c {color: #fbf0d8;}
-#d {color: #b02a29;}
-#e {color: #6d120b;}
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px; /* Limit the width of the form */
+    margin: 0 auto; /* Center the form */
+}
+
+.booking-form label {
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+.booking-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.booking-form button {
+    padding: 10px 15px;
+    background-color: #4a90e2;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.booking-form button:hover {
+    background-color: #357abd;
+}
 
 @media (max-width: 768px) {
     .main-content {
-        margin-left: 0;
-        padding: 20px;
+        margin-left: 0; /* Remove the left margin for smaller screens */
+        margin-top: 60px; /* Space for the navbar */
+    }
+
+    .booking-form {
+        padding: 10px;
     }
 }
