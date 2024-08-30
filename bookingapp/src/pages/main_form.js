@@ -11,7 +11,8 @@ const Form = () => {
                     <li><a>Confirm</a></li>
                 </ul>
             </div>
-            <h1>main form details</h1>
+            <div class="main-content">
+            <h2>SHOWS</h2>
             <ul class="color-theme">
                 <li id="a">cool blue</li>
                 <li id="b">light greyish</li>
@@ -19,6 +20,7 @@ const Form = () => {
                 <li id="d">redwood</li>
                 <li id="e">burnt under</li>
             </ul>
+            </div>
         </div>
     )
 }
