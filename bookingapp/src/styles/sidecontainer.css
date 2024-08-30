@@ -34,7 +34,7 @@
     display: none;
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 90px; /* Position the hamburger icon to the right of the side container */
     z-index: 1100;
     cursor: pointer;
     font-size: 24px;
@@ -59,6 +59,11 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 10px;
+        display: none; /* Hide menu items by default */
+    }
+
+    .side-container.show ul {
+        display: flex; /* Show menu items when the menu is open */
     }
 
     .side-container.show {
@@ -67,5 +72,6 @@
 
     .hamburger {
         display: block;
+        left: 10px; /* Ensure the hamburger icon is positioned next to the side container */
     }
 }
