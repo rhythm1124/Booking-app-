@@ -10,6 +10,10 @@
     z-index: 1000;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0,1);
 }
+.main-content{
+    margin-left: 100px;
+    padding: 20px;
+}
 .side-container ul {
     list-style-type: none;
     padding: 0;
@@ -47,6 +51,10 @@
         align-items: center;
         overflow-x: auto;
         padding: 10px 0;
+    }
+    .main-content{
+        margin-left: 0;
+        padding: 20px;
     }
     .side-container li{
         margin: 0 10px;
