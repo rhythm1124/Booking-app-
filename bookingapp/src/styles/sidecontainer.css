@@ -31,14 +31,11 @@
 }
 
 .hamburger {
-    display: none;
-    position: absolute;
-    top: 20px;
-    left: 90px; /* Position the hamburger icon to the right of the side container */
-    z-index: 1100;
-    cursor: pointer;
+    display: none; /* Hidden by default */
     font-size: 24px;
+    cursor: pointer;
     color: #ffffff;
+    margin-left: 10px; /* Space between user and hamburger icon */
 }
 
 @media (max-width: 768px) {
@@ -46,7 +43,7 @@
         width: 100%;
         height: auto;
         position: fixed;
-        top: 60px; /* Position it below the navbar */
+        top: 60px; /* Position below the navbar */
         left: 0;
         transform: translateY(-100%);
         box-shadow: none;
@@ -71,7 +68,10 @@
     }
 
     .hamburger {
-        display: block;
-        left: 10px; /* Ensure the hamburger icon is positioned next to the side container */
+        display: block; /* Show hamburger icon on smaller screens */
+        position: absolute;
+        right: 10px; /* Align icon to the far right */
+        top: 50%;
+        transform: translateY(-50%); /* Center vertically */
     }
 }
