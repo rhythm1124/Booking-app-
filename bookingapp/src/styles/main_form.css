@@ -1,4 +1,4 @@
-.main-content{
+.main-content {
     margin-left: 100px;
     padding: 20px;
 }
@@ -9,8 +9,8 @@
 #d {color: #b02a29;}
 #e {color: #6d120b;}
 
-@media (max-width:768px) {
-    .main-content{
+@media (max-width: 768px) {
+    .main-content {
         margin-left: 0;
         padding: 20px;
     }
