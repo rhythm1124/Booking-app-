@@ -1,34 +1,45 @@
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Keeps title on the left and user on the right */
     align-items: center;
     background-color: #4a90e2;
     padding: 10px 20px;
     height: 60px;
     margin-left: 80px; /* Aligns the navbar next to the side container */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 900; /* Ensures the navbar is above the side container */
+    z-index: 1100; /* Ensures the navbar is above the side container */
 }
 
 .navbar-title {
-    /* color: #ffffff; */
+    color: #ffffff;
     font-size: 24px;
     font-weight: bold;
+    text-align: left; /* Ensure the title is left-aligned */
 }
 
 .navbar-user {
-    /* color: #ffffff; */
+    color: #ffffff;
     font-size: 18px;
+    text-align: right; /* Ensure the user is right-aligned */
 }
 
 @media (max-width: 768px) {
     .navbar {
         margin-left: 0; /* Remove the left margin on smaller screens */
         padding: 10px;
-        flex-direction: column;
         height: auto;
+        flex-direction: row; /* Keep the title and user aligned in a single row */
     }
-    .navbar-title, .navbar-user {
-        margin: 5px 0;
+    .navbar-title {
+        flex: 1;
+        text-align: left; /* Ensure title remains left-aligned */
+    }
+    .navbar-user {
+        flex: 1;
+        text-align: right; /* Ensure user remains right-aligned */
+    }
+    .hamburger {
+        display: block; /* Ensure hamburger icon is visible */
+        margin-left: 10px; /* Space between the title and the hamburger */
     }
 }

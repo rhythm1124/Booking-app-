@@ -3,15 +3,9 @@ import '../styles/navbar.css';
 
 const NavBar = () => {
     return (
-        <nav classNmae="navbar">
-        <div className="navbar-title">
-            <ul><li>Title</li></ul>
-        </div>
-        <div className="navbar-user">
-            <ul>
-                <li>User</li>
-            </ul>
-        </div>
+        <nav className="navbar"> {/* Corrected the typo from "classNmae" to "className" */}
+            <div className="navbar-title">Title</div>
+            <div className="navbar-user">User</div>
         </nav>
     );
 }
