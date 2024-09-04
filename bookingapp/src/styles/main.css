@@ -1,0 +1,8 @@
+.content {
+    margin-left: 100px; /* To prevent overlap with the side container */
+    padding: 20px;
+}
+
+.main-content {
+    padding: 20px;
+}
