@@ -192,7 +192,7 @@ input {
     min-width: 200px; /* Minimum width for each item */
 }
 
-//* Attendee details styling */
+/* Attendee details styling */
 .attendee-details {
     display: flex;
     flex-direction: column;
