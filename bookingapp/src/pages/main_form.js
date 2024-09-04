@@ -3,7 +3,7 @@ import NavBar from '../components/navbar';   // Import the NavBar component
 import SideContainer from '../components/sideconatiner';  // Import the SideContainer component
 import '../styles/main_form.css';
 
-const Form = () => {
+const FormPage = () => {
     return (
         <div>
             <NavBar /> {/* Add the NavBar component here */}
@@ -36,4 +36,4 @@ const Form = () => {
     );
 }
 
-export default Form;
+export default FormPage;
