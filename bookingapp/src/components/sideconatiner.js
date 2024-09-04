@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/sidecontainer.css';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation for current path
 
 const SideContainer = () => {
+    const location = useLocation(); // Get the current route
+
     return (
         <div className="side-container">
-            <ul>
-                <li><Link to="/">1</Link></li> {/* Main page */}
-                <li><Link to="/form">2</Link></li> {/* Form page */}
-                <li><Link to="/confirmation">3</Link></li> {/* Confirmation page */}
-            </ul>
+            <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>1</Link>
+            <Link to="/form" className={`nav-item ${location.pathname === '/form' ? 'active' : ''}`}>2</Link>
+            <Link to="/confirmation" className={`nav-item ${location.pathname === '/confirmation' ? 'active' : ''}`}>3</Link>
         </div>
     );
-}
+};
 
 export default SideContainer;
