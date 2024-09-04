@@ -4,6 +4,18 @@ import DatePicker from 'react-datepicker'; // Import date picker component
 import 'react-datepicker/dist/react-datepicker.css'; // Import date picker styles
 import '../styles/main_form.css';
 
+const formatDate = (date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+
+const parseDate = (dateStr) => {
+    const [day, month, year] = dateStr.split('/').map(num => parseInt(num, 10));
+    return new Date(year, month - 1, day);
+};
+
 const FormPage = () => {
     const [numTickets, setNumTickets] = useState(1);
     const [formData, setFormData] = useState({
@@ -25,7 +37,7 @@ const FormPage = () => {
 
     // Handle manual date input changes
     const handleManualDateChange = (e) => {
-        const date = new Date(e.target.value);
+        const date = parseDate(e.target.value);
         if (!isNaN(date.getTime())) {
             setFormData({
                 ...formData,
@@ -122,21 +134,59 @@ const FormPage = () => {
             {/* Section 2: Attendee Details */}
             {currentSection === 2 && (
                 <div className="form-section">
-                    <h2>Enter Attendee Details</h2>
+                    <h2>Enter Details</h2>
                     {Array.from({ length: numTickets }).map((_, index) => (
                         <div key={index} className="attendee-details">
-                            <h3>Attendee {index + 1}</h3>
-                            <label htmlFor={`firstName-${index}`}>First Name:</label>
-                            <input type="text" id={`firstName-${index}`} name="firstName" value={formData.attendees[index]?.firstName || ''} onChange={(e) => handleInputChange(index, e)} required />
+                            <h3>Ticket {index + 1}</h3>
+                            <div className="input-group">
+                                <div className="input-group-item">
+                                    <label htmlFor={`firstName-${index}`}>First Name:</label>
+                                    <input
+                                        type="text"
+                                        id={`firstName-${index}`}
+                                        name="firstName"
+                                        value={formData.attendees[index]?.firstName || ''}
+                                        onChange={(e) => handleInputChange(index, e)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group-item">
+                                    <label htmlFor={`lastName-${index}`}>Last Name:</label>
+                                    <input
+                                        type="text"
+                                        id={`lastName-${index}`}
+                                        name="lastName"
+                                        value={formData.attendees[index]?.lastName || ''}
+                                        onChange={(e) => handleInputChange(index, e)}
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-                            <label htmlFor={`lastName-${index}`}>Last Name:</label>
-                            <input type="text" id={`lastName-${index}`} name="lastName" value={formData.attendees[index]?.lastName || ''} onChange={(e) => handleInputChange(index, e)} required />
-
-                            <label htmlFor={`email-${index}`}>Email:</label>
-                            <input type="email" id={`email-${index}`} name="email" value={formData.attendees[index]?.email || ''} onChange={(e) => handleInputChange(index, e)} required />
-
-                            <label htmlFor={`phone-${index}`}>Phone Number:</label>
-                            <input type="tel" id={`phone-${index}`} name="phone" value={formData.attendees[index]?.phone || ''} onChange={(e) => handleInputChange(index, e)} required />
+                            <div className="input-group">
+                                <div className="input-group-item">
+                                    <label htmlFor={`email-${index}`}>Email:</label>
+                                    <input
+                                        type="email"
+                                        id={`email-${index}`}
+                                        name="email"
+                                        value={formData.attendees[index]?.email || ''}
+                                        onChange={(e) => handleInputChange(index, e)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group-item">
+                                    <label htmlFor={`phone-${index}`}>Phone Number:</label>
+                                    <input
+                                        type="tel"
+                                        id={`phone-${index}`}
+                                        name="phone"
+                                        value={formData.attendees[index]?.phone || ''}
+                                        onChange={(e) => handleInputChange(index, e)}
+                                        required
+                                    />
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
