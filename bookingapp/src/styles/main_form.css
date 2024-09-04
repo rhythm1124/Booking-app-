@@ -1,56 +1,172 @@
-.main-content {
-    margin-left: 80px; /* Space for the side container */
-    margin-top: 60px;  /* Space for the navbar */
+/* Overall form page styling */
+.form-page {
     padding: 20px;
-    box-sizing: border-box; /* Include padding in the width calculation */
+    max-width: calc(100% - 100px); /* Adjust width to account for side container */
+    margin: 0 auto;
+    margin-top: 60px; /* Adjust top margin to avoid overlap with fixed navbar */
+    margin-left: 80px; /* Adjust left margin to avoid overlap with fixed side container */
 }
 
+/* Form section styling */
+.form-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* Header styling */
 h1 {
-    font-size: 24px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.booking-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px; /* Limit the width of the form */
-    margin: 0 auto; /* Center the form */
+/* Time slot grid styling */
+.time-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.booking-form label {
-    font-size: 16px;
-    margin: 10px 0 5px;
-}
-
-.booking-form input {
+.time-slot-button {
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    text-align: center;
     font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.booking-form button {
-    padding: 10px 15px;
+.time-slot-button.selected {
     background-color: #4a90e2;
-    color: #ffffff;
+    color: white;
+    border-color: #4a90e2;
+}
+
+/* Ticket controls styling */
+.ticket-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ticket-button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.ticket-button:hover {
+    background-color: #e1e1e1;
+}
+
+.ticket-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    cursor: default;
+    height: 40px; /* Ensure height matches the button height */
+}
+
+/* Ensures the input box and buttons align properly */
+.ticket-controls > * {
+    height: 40px; /* Consistent height for alignment */
+}
+
+/* Button styling */
+.save-next-button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s;
 }
 
-.booking-form button:hover {
+.save-next-button:hover {
     background-color: #357abd;
 }
 
-@media (max-width: 768px) {
-    .main-content {
-        margin-left: 0; /* Remove the left margin for smaller screens */
-        margin-top: 60px; /* Space for the navbar */
-    }
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
 
-    .booking-form {
-        padding: 10px;
-    }
+/* Input field styling */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+/* Ticket controls styling */
+.ticket-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    /* Adjust vertical alignment */
+    justify-content: center;
+}
+
+.ticket-button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    height: 40px; /* Ensure button height matches the input height */
+}
+
+.ticket-button:hover {
+    background-color: #e1e1e1;
+}
+
+.ticket-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    cursor: default;
+    height: 40px; /* Ensure height matches the button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensures the input box and buttons align properly */
+.ticket-controls > * {
+    height: 40px; /* Consistent height for alignment */
 }
