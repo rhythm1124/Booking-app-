@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // To navigate to confirmation page
+import DatePicker from 'react-datepicker'; // Import your date picker component
+import 'react-datepicker/dist/react-datepicker.css'; // Import date picker styles
 import '../styles/main_form.css';
 
 const FormPage = () => {
     const [numTickets, setNumTickets] = useState(1);
     const [formData, setFormData] = useState({
-        date: '',
+        date: new Date(),
         time: '',
         tickets: 1,
         attendees: [{ firstName: '', lastName: '', email: '', phone: '' }],
@@ -63,14 +65,26 @@ const FormPage = () => {
 
     return (
         <div className="form-page">
-            <h1>Book Your Show/Movie</h1>
 
             {/* Section 1: Date, Time, and Tickets */}
             {currentSection === 1 && (
                 <div className="form-section">
                     <h2>Select Date, Time, and Tickets</h2>
                     <label htmlFor="date">Preferred Date:</label>
-                    <input type="date" id="date" name="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} required />
+                    <DatePicker
+                        selected={formData.date}
+                        onChange={(date) => setFormData({ ...formData, date })}
+                        dateFormat="yyyy/MM/dd"
+                        className="date-input"
+                        placeholderText="Select date"
+                    />
+                    <input
+                        type="text"
+                        value={formData.date.toISOString().substring(0, 10)}
+                        onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value) })}
+                        className="manual-date-input"
+                        placeholder="YYYY-MM-DD"
+                    />
 
                     <label htmlFor="time">Preferred Time:</label>
                     <div className="time-slot-grid">
