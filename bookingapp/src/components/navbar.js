@@ -16,7 +16,7 @@ const NavBar = () => {
             case '/':
                 return 'Select Movie';
             case '/form':
-                return 'Add Details';
+                return 'Details';
             case '/confirmation':
                 return 'Confirm';
             default:
@@ -27,7 +27,6 @@ const NavBar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-title">{getPageTitle()}</div>
-            <div className="navbar-user">User</div>
             <div className="navbar-hamburger" onClick={toggleMenu}>
                 &#9776; {/* Unicode for the hamburger icon */}
             </div>
