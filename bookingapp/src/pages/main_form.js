@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // To navigate to the confirmation page
+import { useNavigate } from 'react-router-dom'; // To navigate to confirmation page
 import '../styles/main_form.css';
 
-const timeSlots = [
-    "09:00 AM",
-    "11:00 AM",
-    "01:00 PM",
-    "03:00 PM",
-    "05:00 PM",
-    "07:00 PM",
-    "09:00 PM"
-];
-
 const FormPage = () => {
-    const [currentSection, setCurrentSection] = useState(1);
     const [numTickets, setNumTickets] = useState(1);
     const [formData, setFormData] = useState({
         date: '',
@@ -21,16 +10,9 @@ const FormPage = () => {
         tickets: 1,
         attendees: [{ firstName: '', lastName: '', email: '', phone: '' }],
     });
-
+    const [currentSection, setCurrentSection] = useState(1); // Track the current section
     const navigate = useNavigate();
 
-    // Handle change in form fields
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    // Handle ticket details change
     const handleInputChange = (index, event) => {
         const { name, value } = event.target;
         const newAttendees = [...formData.attendees];
@@ -48,54 +30,34 @@ const FormPage = () => {
         });
     };
 
-    // Increment and decrement functions for tickets
-    const incrementTickets = () => {
-        setNumTickets(prev => {
-            const newCount = prev + 1;
-            setFormData({
-                ...formData,
-                tickets: newCount,
-                attendees: Array(newCount).fill({ firstName: '', lastName: '', email: '', phone: '' }),
-            });
-            return newCount;
-        });
+    const validateSection1 = () => {
+        return formData.date && formData.time && formData.tickets > 0;
     };
 
-    const decrementTickets = () => {
-        setNumTickets(prev => {
-            if (prev > 1) {
-                const newCount = prev - 1;
-                setFormData({
-                    ...formData,
-                    tickets: newCount,
-                    attendees: Array(newCount).fill({ firstName: '', lastName: '', email: '', phone: '' }),
-                });
-                return newCount;
-            }
-            return prev;
-        });
-    };
-
-    const handleNext = () => {
-        if (validateCurrentSection()) {
-            setCurrentSection(currentSection + 1);
-        }
-    };
-
-    const validateCurrentSection = () => {
-        if (currentSection === 1) {
-            return formData.date && formData.time && formData.tickets;
-        } else if (currentSection === 2) {
-            return formData.attendees.every(attendee =>
-                attendee.firstName && attendee.lastName && attendee.email && attendee.phone
-            );
-        }
-        return true;
+    const validateSection2 = () => {
+        return formData.attendees.every(attendee =>
+            attendee.firstName && attendee.lastName && attendee.email && attendee.phone
+        );
     };
 
     const handleSaveAndNext = () => {
-        if (validateCurrentSection()) {
+        if (currentSection === 1 && !validateSection1()) {
+            alert('Please fill in all fields in the current section.');
+            return;
+        }
+
+        if (currentSection === 2 && !validateSection2()) {
+            alert('Please fill in all attendee details.');
+            return;
+        }
+
+        if (currentSection === 2) {
+            // Proceed to confirmation page
+            console.log('Form data:', formData);
             navigate('/confirmation');
+        } else {
+            // Move to the next section
+            setCurrentSection(currentSection + 1);
         }
     };
 
@@ -103,56 +65,33 @@ const FormPage = () => {
         <div className="form-page">
             <h1>Book Your Show/Movie</h1>
 
+            {/* Section 1: Date, Time, and Tickets */}
             {currentSection === 1 && (
                 <div className="form-section">
                     <h2>Select Date, Time, and Tickets</h2>
                     <label htmlFor="date">Preferred Date:</label>
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        value={formData.date}
-                        onChange={handleChange}
-                        required
-                    />
+                    <input type="date" id="date" name="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} required />
 
-                    <label htmlFor="time">Preferred Time Slot:</label>
+                    <label htmlFor="time">Preferred Time:</label>
                     <div className="time-slot-grid">
-                        {timeSlots.map((slot, index) => (
-                            <button
-                                key={index}
-                                className={`time-slot-button ${formData.time === slot ? 'selected' : ''}`}
-                                onClick={() => setFormData({ ...formData, time: slot })}
-                            >
-                                {slot}
-                            </button>
-                        ))}
+                        {/* Example time slots */}
+                        <div className={`time-slot-button ${formData.time === '10:00' ? 'selected' : ''}`} onClick={() => setFormData({ ...formData, time: '10:00' })}>10:00</div>
+                        <div className={`time-slot-button ${formData.time === '12:00' ? 'selected' : ''}`} onClick={() => setFormData({ ...formData, time: '12:00' })}>12:00</div>
+                        <div className={`time-slot-button ${formData.time === '14:00' ? 'selected' : ''}`} onClick={() => setFormData({ ...formData, time: '14:00' })}>14:00</div>
+                        <div className={`time-slot-button ${formData.time === '16:00' ? 'selected' : ''}`} onClick={() => setFormData({ ...formData, time: '16:00' })}>16:00</div>
+                        <div className={`time-slot-button ${formData.time === '18:00' ? 'selected' : ''}`} onClick={() => setFormData({ ...formData, time: '18:00' })}>18:00</div>
                     </div>
 
                     <label htmlFor="tickets">Number of Tickets:</label>
                     <div className="ticket-controls">
-                        <button className="ticket-button" onClick={decrementTickets}>-</button>
-                        <input
-                            type="text"
-                            id="tickets"
-                            name="tickets"
-                            value={numTickets}
-                            readOnly
-                            className="ticket-input"
-                        />
-                        <button className="ticket-button" onClick={incrementTickets}>+</button>
+                        <button className="ticket-button" onClick={() => setNumTickets(numTickets - 1)} disabled={numTickets <= 1}>-</button>
+                        <input type="text" className="ticket-input" value={numTickets} readOnly />
+                        <button className="ticket-button" onClick={() => setNumTickets(numTickets + 1)}>+</button>
                     </div>
-
-                    <button
-                        className="save-next-button"
-                        onClick={handleNext}
-                        disabled={!validateCurrentSection()}
-                    >
-                        Next
-                    </button>
                 </div>
             )}
 
+            {/* Section 2: Attendee Details */}
             {currentSection === 2 && (
                 <div className="form-section">
                     <h2>Enter Attendee Details</h2>
@@ -160,67 +99,27 @@ const FormPage = () => {
                         <div key={index} className="attendee-details">
                             <h3>Attendee {index + 1}</h3>
                             <label htmlFor={`firstName-${index}`}>First Name:</label>
-                            <input
-                                type="text"
-                                id={`firstName-${index}`}
-                                name="firstName"
-                                value={formData.attendees[index]?.firstName || ''}
-                                onChange={(e) => handleInputChange(index, e)}
-                                required
-                            />
+                            <input type="text" id={`firstName-${index}`} name="firstName" value={formData.attendees[index]?.firstName || ''} onChange={(e) => handleInputChange(index, e)} required />
 
                             <label htmlFor={`lastName-${index}`}>Last Name:</label>
-                            <input
-                                type="text"
-                                id={`lastName-${index}`}
-                                name="lastName"
-                                value={formData.attendees[index]?.lastName || ''}
-                                onChange={(e) => handleInputChange(index, e)}
-                                required
-                            />
+                            <input type="text" id={`lastName-${index}`} name="lastName" value={formData.attendees[index]?.lastName || ''} onChange={(e) => handleInputChange(index, e)} required />
 
                             <label htmlFor={`email-${index}`}>Email:</label>
-                            <input
-                                type="email"
-                                id={`email-${index}`}
-                                name="email"
-                                value={formData.attendees[index]?.email || ''}
-                                onChange={(e) => handleInputChange(index, e)}
-                                required
-                            />
+                            <input type="email" id={`email-${index}`} name="email" value={formData.attendees[index]?.email || ''} onChange={(e) => handleInputChange(index, e)} required />
 
                             <label htmlFor={`phone-${index}`}>Phone Number:</label>
-                            <input
-                                type="tel"
-                                id={`phone-${index}`}
-                                name="phone"
-                                value={formData.attendees[index]?.phone || ''}
-                                onChange={(e) => handleInputChange(index, e)}
-                                required
-                            />
+                            <input type="tel" id={`phone-${index}`} name="phone" value={formData.attendees[index]?.phone || ''} onChange={(e) => handleInputChange(index, e)} required />
                         </div>
                     ))}
-                    <button
-                        className="save-next-button"
-                        onClick={handleNext}
-                        disabled={!validateCurrentSection()}
-                    >
-                        Next
-                    </button>
                 </div>
             )}
 
-            {currentSection === 3 && (
-                <div className="form-section">
-                    <button
-                        className="save-next-button"
-                        onClick={handleSaveAndNext}
-                        disabled={!validateCurrentSection()}
-                    >
-                        Save and Next
-                    </button>
-                </div>
-            )}
+            {/* Section 3: Save and Next */}
+            <div className="form-section">
+                <button className="save-next-button" onClick={handleSaveAndNext}>
+                    {currentSection === 2 ? 'Save and Next' : 'Next'}
+                </button>
+            </div>
         </div>
     );
 };
