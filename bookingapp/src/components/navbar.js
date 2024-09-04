@@ -18,9 +18,9 @@ const NavBar = () => {
             {/* Menu dropdown */}
             <div className={`side-menu ${isOpen ? 'show' : ''}`}>
                 <ul>
-                    <li><a href="#details">Details</a></li>
-                    <li><a href="#event">Event</a></li>
-                    <li><a href="#confirm">Confirm</a></li>
+                    <li><a href="/">Details</a></li>
+                    <li><a href="/form">Event</a></li>
+                    <li><a href="/confirmation">Confirm</a></li>
                 </ul>
             </div>
         </nav>
