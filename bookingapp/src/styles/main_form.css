@@ -133,24 +133,22 @@ input {
 }
 
 /* Date input styling */
-.date-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-    margin-bottom: 15px;
+.date-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between inputs */
 }
 
-/* Manual date input styling */
-.manual-date-input {
+.date-input, .manual-date-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
+}
+
+.manual-date-input {
     margin-top: 10px;
 }
 

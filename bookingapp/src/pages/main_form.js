@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // To navigate to confirmation page
-import DatePicker from 'react-datepicker'; // Import your date picker component
+import DatePicker from 'react-datepicker'; // Import date picker component
 import 'react-datepicker/dist/react-datepicker.css'; // Import date picker styles
 import '../styles/main_form.css';
 
@@ -14,6 +14,25 @@ const FormPage = () => {
     });
     const [currentSection, setCurrentSection] = useState(1); // Track the current section
     const navigate = useNavigate();
+
+    // Handle date changes from DatePicker
+    const handleDateChange = (date) => {
+        setFormData({
+            ...formData,
+            date,
+        });
+    };
+
+    // Handle manual date input changes
+    const handleManualDateChange = (e) => {
+        const date = new Date(e.target.value);
+        if (!isNaN(date.getTime())) {
+            setFormData({
+                ...formData,
+                date,
+            });
+        }
+    };
 
     const handleInputChange = (index, event) => {
         const { name, value } = event.target;
@@ -71,20 +90,15 @@ const FormPage = () => {
                 <div className="form-section">
                     <h2>Select Date, Time, and Tickets</h2>
                     <label htmlFor="date">Preferred Date:</label>
-                    <DatePicker
-                        selected={formData.date}
-                        onChange={(date) => setFormData({ ...formData, date })}
-                        dateFormat="yyyy/MM/dd"
-                        className="date-input"
-                        placeholderText="Select date"
-                    />
-                    <input
-                        type="text"
-                        value={formData.date.toISOString().substring(0, 10)}
-                        onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value) })}
-                        className="manual-date-input"
-                        placeholder="YYYY-MM-DD"
-                    />
+                    <div className="date-input-wrapper">
+                        <DatePicker
+                            selected={formData.date}
+                            onChange={handleDateChange}
+                            dateFormat="dd/MM/yyyy"
+                            className="date-input"
+                            placeholderText="Select date"
+                        />
+                    </div>
 
                     <label htmlFor="time">Preferred Time:</label>
                     <div className="time-slot-grid">
