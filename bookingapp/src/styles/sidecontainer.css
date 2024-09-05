@@ -1,13 +1,15 @@
 .side-container {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center the list items vertically */
+    align-items: center;
     position: fixed;
     background-color: #739ab9;
     height: 100vh;
-    width: 80px; /* Fixed width for side container */
-    top: 0; /* Aligns to the top */
-    left: 0; /* Aligns to the left edge */
-    z-index: 1000; /* Ensures it's below the navbar */
+    width: 80px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -16,13 +18,35 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .side-container li {
-    margin: 10px 0;
+    margin: 15px 0; /* Increase margin to spread out the circles */
     padding: 10px;
     color: #fbf0d8;
     cursor: pointer;
+    width: 40px; /* Slightly increased circle size */
+    height: 40px;
+    background-color: #4a90e2;
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    font-size: 16px; /* Adjust font size if needed */
+}
+
+.side-container li.active {
+    background-color: #113047; /* Highlight color for active item */
+    font-weight: bold; /* Optional: bold font for active item */
+}
+
+.side-container li:hover {
+    background-color: #113047; /* Highlight color for hovered item */
 }
 
 .side-container a {
