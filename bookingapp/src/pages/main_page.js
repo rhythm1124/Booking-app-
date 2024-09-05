@@ -23,7 +23,6 @@ const MainPage = () => {
 
     return (
         <div className="main-content">
-            <h1>Select a Movie</h1>
             <div className="catalog">
                 {movies.map((movie, index) => (
                     <div 
