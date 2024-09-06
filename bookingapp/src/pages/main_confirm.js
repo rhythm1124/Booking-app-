@@ -15,6 +15,11 @@ const ConfirmationPage = () => {
         navigate('/form', { state: { formData } });
     };
 
+    const handleConfirm = () => {
+        alert('Ticket has been successfully confirmed!');
+        // You can add logic to handle booking confirmation, e.g., saving data to a server here.
+    };
+
     return (
         <div className="confirmation-page">
             <br/><br/><br/>
@@ -24,16 +29,14 @@ const ConfirmationPage = () => {
                 <p><strong>Tickets:</strong> {formData.tickets}</p>
                 {formData.attendees.map((attendee, index) => (
                     <div key={index} className="attendee-info">
-                        <p><strong>Ticket {index + 1}</strong></p>
-                        <p><strong>First Name:</strong> {attendee.firstName}</p>
-                        <p><strong>Last Name:</strong> {attendee.lastName}</p>
+                        <p><strong>Ticket {index + 1}:</strong> {attendee.firstName} {attendee.lastName}</p>
                         <p><strong>Email:</strong> {attendee.email}</p>
                         <p><strong>Phone:</strong> {attendee.phone}</p>
                     </div>
                 ))}
             </div>
             <button className="edit-button" onClick={handleEdit}>Edit</button>
-            <button className="confirm-button">Confirm Booking</button>
+            <button className="confirm-button" onClick={handleConfirm}>Confirm</button>
         </div>
     );
 };
