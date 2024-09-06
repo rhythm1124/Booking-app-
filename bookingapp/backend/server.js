@@ -1,30 +1,29 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const cors = require('cors'); // Import CORS
+const app = express();
 const bodyParser = require('body-parser');
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
+// Middleware to parse JSON data from the request body
 app.use(bodyParser.json());
 
-// MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/bookingapp', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+// POST route to handle booking submissions
+app.post('/api/bookings', (req, res) => {
+    const bookingData = req.body;
+
+    // Check if the data is valid
+    if (!bookingData || !bookingData.attendees || bookingData.attendees.length === 0) {
+        return res.status(400).json({ message: 'Invalid booking data' });
+    }
+
+    // Simulate saving to the database
+    console.log('Booking confirmed:', bookingData);
+
+    // Respond with success
+    res.status(200).json({ message: 'Booking confirmed successfully' });
 });
 
-// Routes
-const movieRoutes = require('./routes/movieRoutes');
-const userRoutes = require('./routes/userRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
-
-app.use('/movies', movieRoutes);
-app.use('/users', userRoutes);
-app.use('/bookings', bookingRoutes);
-
+// Start the server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
