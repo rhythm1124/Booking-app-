@@ -1,10 +1,10 @@
-/* Overall form page styling */
+/* General form styling */
 .form-page {
     padding: 20px;
-    max-width: calc(100% - 100px); /* Adjust width to account for side container */
+    max-width: calc(100% - 100px);
     margin: 0 auto;
-    margin-top: 60px; /* Adjust top margin to avoid overlap with fixed navbar */
-    margin-left: 80px; /* Adjust left margin to avoid overlap with fixed side container */
+    margin-top: 60px;
+    margin-left: 80px;
     box-sizing: border-box;
 }
 
@@ -18,10 +18,47 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Header styling */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Side-by-side input group styling */
+.input-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.input-group-item {
+    flex: 1;
+    min-width: 200px;
 }
 
 /* Time slot grid styling */
@@ -53,219 +90,51 @@ h1 {
 .ticket-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 5px;
     margin-bottom: 20px;
-    justify-content: center; /* Center-align the controls */
 }
 
 .ticket-button {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    font-size: 18px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
     transition: background-color 0.3s;
-    height: 40px; /* Ensure button height matches the input height */
-    width: 40px; /* Ensure consistent width for buttons */
 }
 
 .ticket-button:hover {
-    background-color: #e1e1e1;
+    background-color: #d0d0d0;
 }
 
 .ticket-input {
     width: 60px;
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    background-color: #f9f9f9;
     font-size: 16px;
-    cursor: default;
-    height: 40px; /* Ensure height matches the button height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Ensures the input box and buttons align properly */
-.ticket-controls > * {
-    height: 40px; /* Consistent height for alignment */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 /* Button styling */
 .save-next-button {
-    padding: 10px 20px;
-    background-color: #4a90e2;
-    color: white;
+    padding: 12px 24px;
     border: none;
     border-radius: 4px;
+    background-color: #4a90e2;
+    color: white;
     font-size: 16px;
     cursor: pointer;
-    display: block;
-    margin: 20px auto; /* Center button and add spacing */
     transition: background-color 0.3s;
 }
 
 .save-next-button:hover {
     background-color: #357abd;
-}
-
-/* Label styling */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-/* Input field styling */
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Date input styling */
-.date-input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Space between inputs */
-}
-
-.date-input, .manual-date-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-.manual-date-input {
-    margin-top: 10px;
-}
-
-/* Responsive design adjustments */
-@media (max-width: 768px) {
-    .form-page {
-        margin-left: 0; /* Remove left margin on smaller screens */
-        padding: 10px;
-    }
-
-    .ticket-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .ticket-button {
-        width: 100%;
-        box-sizing: border-box; /* Ensure full width is respected */
-    }
-
-    .ticket-input {
-        width: 100%;
-    }
-
-    .save-next-button {
-        width: 100%;
-    }
-}
-
-/* Input group container */
-.input-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between items */
-    margin-bottom: 20px;
-}
-
-/* Input group item */
-.input-group-item {
-    flex: 1; /* Grow to fill available space */
-    min-width: 200px; /* Minimum width for each item */
-}
-
-/* Attendee details styling */
-.attendee-details {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.input-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Adjust gap as needed */
-}
-
-.input-group-item {
-    flex: 1;
-    min-width: 200px; /* Minimum width for input fields */
-}
-
-.input-group-item label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.input-group-item input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Ensures that "Ticket 1" label is above the name fields */
-.attendee-details > h3 {
-    margin-bottom: 15px;
-}
-
-/* Styles for ticket controls */
-.ticket-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.ticket-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.ticket-input {
-    width: 40px;
-    text-align: center;
-    border: 1px solid #ddd;
-    padding: 5px;
-    border-radius: 4px;
-}
-
-/* Button styling */
-.save-next-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.save-next-button:hover {
-    background-color: #45a049;
 }
