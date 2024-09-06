@@ -4,13 +4,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/main_form.css';
 
-const formatDate = (date) => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-};
-
 const FormPage = () => {
     const [numTickets, setNumTickets] = useState(1);
     const [formData, setFormData] = useState({
@@ -38,7 +31,7 @@ const FormPage = () => {
 
     const handleTicketsChange = (increment) => {
         const newTicketCount = numTickets + increment;
-        if (newTicketCount < 1) return; // Prevent negative tickets
+        if (newTicketCount < 1) return;
 
         setNumTickets(newTicketCount);
 
@@ -57,7 +50,7 @@ const FormPage = () => {
         attendee.firstName && attendee.lastName && attendee.email && attendee.phone
     );
 
-    const handleSaveAndNext = () => {
+    const handleSaveAndNext = async () => {
         if (currentSection === 1 && !validateSection1()) {
             alert('Please fill in all fields.');
             return;
@@ -67,7 +60,23 @@ const FormPage = () => {
             return;
         }
         if (currentSection === 2) {
-            navigate('/confirmation', { state: { formData } });
+            try {
+                const response = await fetch('http://localhost:5000/api/booking', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+                if (response.ok) {
+                    navigate('/confirmation', { state: { formData } });
+                } else {
+                    alert('Failed to save booking.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            }
         } else {
             setCurrentSection(currentSection + 1);
         }
@@ -99,9 +108,9 @@ const FormPage = () => {
                     </div>
                     <label htmlFor="tickets">Number of Tickets:</label>
                     <div className="ticket-controls">
-                        <button className="ticket-button" onClick={() => handleTicketsChange(-1)} disabled={numTickets <= 1}>-</button>
-                        <input className="ticket-input" type="text" value={numTickets} readOnly />
-                        <button className="ticket-button" onClick={() => handleTicketsChange(1)}>+</button>
+                        <button onClick={() => handleTicketsChange(-1)} disabled={numTickets <= 1}>-</button>
+                        <input type="text" value={numTickets} readOnly />
+                        <button onClick={() => handleTicketsChange(1)}>+</button>
                     </div>
                 </div>
             )}
@@ -110,55 +119,54 @@ const FormPage = () => {
                 <div className="form-section">
                     <h2>Enter Details</h2>
                     {formData.attendees.map((attendee, index) => (
-                        <div key={index} className="attendee-details">
-                            <h3>Ticket {index + 1}</h3>
-                            <div className="input-group">
-                                <div className="input-group-item">
-                                    <label htmlFor={`firstName-${index}`}>First Name</label>
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        id={`firstName-${index}`}
-                                        value={attendee.firstName}
-                                        onChange={(e) => handleInputChange(index, e)}
-                                        required
-                                    />
-                                </div>
-                                <div className="input-group-item">
-                                    <label htmlFor={`lastName-${index}`}>Last Name</label>
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        id={`lastName-${index}`}
-                                        value={attendee.lastName}
-                                        onChange={(e) => handleInputChange(index, e)}
-                                        required
-                                    />
-                                </div>
+                        <div key={index} className="input-group">
+                            <div className="input-group-item">
+                                <label htmlFor={`firstName-${index}`}>First Name:</label>
+                                <input
+                                    type="text"
+                                    id={`firstName-${index}`}
+                                    name="firstName"
+                                    placeholder="First Name"
+                                    value={attendee.firstName}
+                                    onChange={(e) => handleInputChange(index, e)}
+                                    required
+                                />
                             </div>
-                            <div className="input-group">
-                                <div className="input-group-item">
-                                    <label htmlFor={`email-${index}`}>Email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id={`email-${index}`}
-                                        value={attendee.email}
-                                        onChange={(e) => handleInputChange(index, e)}
-                                        required
-                                    />
-                                </div>
-                                <div className="input-group-item">
-                                    <label htmlFor={`phone-${index}`}>Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        id={`phone-${index}`}
-                                        value={attendee.phone}
-                                        onChange={(e) => handleInputChange(index, e)}
-                                        required
-                                    />
-                                </div>
+                            <div className="input-group-item">
+                                <label htmlFor={`lastName-${index}`}>Last Name:</label>
+                                <input
+                                    type="text"
+                                    id={`lastName-${index}`}
+                                    name="lastName"
+                                    placeholder="Last Name"
+                                    value={attendee.lastName}
+                                    onChange={(e) => handleInputChange(index, e)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group-item">
+                                <label htmlFor={`email-${index}`}>Email:</label>
+                                <input
+                                    type="email"
+                                    id={`email-${index}`}
+                                    name="email"
+                                    placeholder="Email"
+                                    value={attendee.email}
+                                    onChange={(e) => handleInputChange(index, e)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group-item">
+                                <label htmlFor={`phone-${index}`}>Phone Number:</label>
+                                <input
+                                    type="tel"
+                                    id={`phone-${index}`}
+                                    name="phone"
+                                    placeholder="Phone Number"
+                                    value={attendee.phone}
+                                    onChange={(e) => handleInputChange(index, e)}
+                                    required
+                                />
                             </div>
                         </div>
                     ))}
